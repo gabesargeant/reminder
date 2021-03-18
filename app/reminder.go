@@ -12,6 +12,7 @@ import (
 //Green the color
 var green  = "\033[32m"
 var reset = "\033[0m"
+var red   = "\033[31m"
 
 type reminder struct {
 	note     string `json:note`
@@ -41,7 +42,10 @@ func main() {
 	flag.Parse()
 	buildReminder(args)
 	setRem := confirmSetReminder()
-	fmt.Println(setRem)
+	if(setRem == false){
+		fmt.Println(red + "Reminder Cancelled" + reset);
+		os.Exit(-99)
+	}
 	
 }
 
@@ -49,18 +53,21 @@ func confirmSetReminder() bool {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print(green + "Confirm set? (Y/N) :" + reset)
 	yN, _ := reader.ReadString('\n')
-	fmt.Println(yN)
-	yN = strings.ToLower(yN);
+	yN = strings.ToLower(yN)
+	yN = strings.TrimSpace(yN)
 	
 	if yN == "y" {
-		fmt.Println("tick")
-		return true;
-	}
-	return false;
+		fmt.Println("")
+		return true
+	}	
+	return false
 
 }
 
 func buildReminder(args Args) {
-	fmt.Println(args)
-	fmt.Println(*args.to, *args.note, *args.datetime)
+	fmt.Println(red +"------------------------------------------------------------" + reset)
+	fmt.Println(red + "TO: "+ reset, *args.to)
+	fmt.Println(red + "NOTE: "+ reset, *args.note)
+	fmt.Println(red + "DATETIME: "+ reset,  *args.datetime)
+	fmt.Println(red +"------------------------------------------------------------" + reset + "\n")
 }
