@@ -1,9 +1,9 @@
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
+# no binaries
+**/*
+!**/*.go
+!**/
+!.gitignore
+!README.md
 
 # Test binary, built with `go test -c`
 *.test
