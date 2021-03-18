@@ -46,6 +46,10 @@ func main() {
 		fmt.Println(red + "Reminder Cancelled" + reset);
 		os.Exit(-99)
 	}
+
+	buildEvent();
+	scheduleEvent();
+	confirmEvent();
 	
 }
 
